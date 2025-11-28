@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>IFSP 248 Fanzines</title>
+    <link rel="icon" type="image/png" href="assets/thumbs/punho.png">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --cream: #f6efe1;
+            --muted: #5b4739;
+            --accent: #d97706;
+            --accent-dark: #6b2e1f;
+            --card: #ffffff;
+            --maxWidth: 1120px;
+            --radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+            background: linear-gradient(135deg, #faf7f2, #f1ece5);
+            background-attachment: fixed;
+            color: var(--muted);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.45;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .bg-fist {
+            position: fixed;
+            right: -6vw;
+            top: -6vh;
+            width: 70vw;
+            height: 120vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.22;
+            filter: contrast(0.98) saturate(1) blur(.4px);
+            mix-blend-mode: multiply;
+        }
+
+        .decor {
+            position: fixed;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: visible;
+            opacity: 1;
+        }
+
+        .dot {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.36;
+            transform: translateZ(0);
+            filter: blur(8px);
+            mix-blend-mode: normal;
+            pointer-events: none;
+        }
+
+        .d1 {
+            width: 600px;
+            height: 600px;
+            left: -160px;
+            top: -140px;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 40%),
+                linear-gradient(180deg, rgba(217, 119, 6, 0.98), rgba(154, 52, 18, 0.95));
+        }
+
+        .d2 {
+            width: 480px;
+            height: 480px;
+            right: -160px;
+            top: 60px;
+            background: radial-gradient(circle at 70% 30%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 40%),
+                linear-gradient(120deg, rgba(249, 214, 104, 0.98), rgba(217, 119, 6, 0.96));
+        }
+
+        .d3 {
+            width: 360px;
+            height: 360px;
+            left: 38%;
+            top: 600px;
+            opacity: 0.28;
+            background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 35%),
+                linear-gradient(180deg, #f6ebe0, #f1dcc6);
+        }
+
+        .lines {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.16;
+            mix-blend-mode: multiply;
+        }
+
+        .hero {
+            width: 100%;
+            padding: 72px 28px;
+            box-sizing: border-box;
+            border-bottom-left-radius: 28px;
+            border-bottom-right-radius: 28px;
+            position: relative;
+            z-index: 2;
+            overflow: visible;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            min-height: 52vh;
+            background:
+                linear-gradient(180deg, rgba(18, 18, 18, 0.88), rgba(28, 22, 20, 0.88));
+            color: #f7efe6;
+        }
+
+        .hero-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            width: 100%;
+        }
+
+        .hero-text {
+            flex: 1;
+            z-index: 3
+        }
+
+        .kicker {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.88);
+            font-weight: 600;
+            margin-bottom: 8px
+        }
+
+        .hero-title {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            color: #fff;
+            font-size: 44px;
+            line-height: 1.02;
+            letter-spacing: -0.6px;
+            text-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+        }
+
+        .hero-sub {
+            margin-top: 10px;
+            color: rgba(255, 255, 255, 0.88);
+            font-size: 16px;
+            max-width: 680px
+        }
+
+        .hero-cta {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            z-index: 3
+        }
+
+        .btn {
+            border-radius: 10px;
+            padding: 10px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: transparent;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(2, 2, 2, 0.45);
+            transition: transform .14s ease, box-shadow .14s ease, opacity .14s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            opacity: 0.98
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #ffb84d, #d97706);
+            color: #2b1205;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            box-shadow: 0 12px 28px rgba(217, 119, 6, 0.14);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.9)
+        }
+
+        .hero-image {
+            width: 260px;
+            flex: 0 0 260px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 36px rgba(0, 0, 0, 0.35);
+            background: linear-gradient(180deg, #2b1205, #43221a)
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            aspect-ratio: 4/5
+        }
+
+        .main {
+            max-width: var(--maxWidth);
+            margin: 34px auto;
+            padding: 0 20px 80px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .section-head h2 {
+            margin: 0;
+            color: var(--accent-dark);
+            font-size: 20px
+        }
+
+        .pdf-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px
+        }
+
+        .pdf-card {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: var(--card);
+            padding: 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 30px rgba(22, 20, 19, 0.04);
+            transition: transform .16s ease, box-shadow .16s ease;
+        }
+
+        .thumb {
+            width: 260px;
+            height: auto;
+            flex: 0 0 260px;
+            overflow: hidden;
+            border-radius: 10px;
+            background: linear-gradient(180deg, #fff7ef, #f3e8db);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 12px 26px rgba(0, 0, 0, 0.06);
+        }
+
+        .thumb img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            display: block
+        }
+
+        .meta {
+            flex: 1;
+            display: flex;
+            flex-direction: column
+        }
+
+        .title {
+            font-size: 2rem;
+            margin: 0;
+            color: var(--accent-dark);
+            font-weight: 700
+        }
+
+        .authors {
+            margin-top: 0.5rem;
+            color: var(--muted);
+            font-size: 1rem;
+        }
+
+        .desc {
+            margin-top: 1rem;
+            color: var(--muted);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .meta-bottom {
+            margin-top: auto;
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        @media (max-width:1000px) {
+            .thumb {
+                width: 200px;
+                height: 280px;
+                flex: 0 0 200px
+            }
+
+            .hero-title {
+                font-size: 36px
+            }
+
+            .hero {
+                padding: 56px 20px
+            }
+        }
+
+        @media (max-width:760px) {
+            .hero {
+                padding: 40px 18px;
+                min-height: 44vh;
+                flex-direction: column;
+                align-items: flex-start
+            }
+
+            .hero-inner {
+                flex-direction: column;
+                align-items: flex-start
+            }
+
+            .thumb {
+                width: 62%;
+                height: auto;
+                aspect-ratio: 2/3;
+                border-radius: 12px
+            }
+
+            .pdf-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center
+            }
+
+            .meta-bottom {
+                justify-content: center
+            }
+
+            .hero-image {
+                width: 62%;
+                flex: 0 0 auto
+            }
+        }
+
+        a {
+            color: inherit
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="decor" aria-hidden="true">
+        <div class="dot d1" aria-hidden="true"></div>
+        <div class="dot d2" aria-hidden="true"></div>
+        <div class="dot d3" aria-hidden="true"></div>
+
+        <svg class="lines" width="100%" height="100%" viewBox="0 0 1600 900" preserveAspectRatio="none"
+            aria-hidden="true">
+            <defs>
+                <linearGradient id="lineGrad" x1="0" x2="1">
+                    <stop offset="0" stop-color="#fff" stop-opacity="0.28" />
+                    <stop offset="1" stop-color="#f7e4c8" stop-opacity="0.12" />
+                </linearGradient>
+            </defs>
+            <g stroke="url(#lineGrad)" stroke-width="1.4" stroke-linecap="round" opacity="0.98">
+                <path d="M-200 120 L1800 -40" />
+                <path d="M-200 260 L1800 100" />
+                <path d="M-200 420 L1800 260" />
+                <path d="M-200 560 L1800 420" />
+            </g>
+        </svg>
+    </div>
+
+    <header class="hero" role="banner" aria-label="Apresentação principal">
+        <div class="hero-inner">
+            <div class="hero-text">
+                <div class="kicker">Featured Collection</div>
+                <h1 class="hero-title">Celebrating English-language Black voices</h1>
+                <p class="hero-sub">Check out the Fanzines created by IFSP CTII248 students focusing on Black authors.</p>
+
+                <div class="hero-cta" aria-hidden="false">
+                    <button class="btn-primary btn" id="btn-browse" aria-controls="list">Browse collection</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main" id="main" role="main">
+        <div class="section-head" id="list-header">
+            <h2>Fanzines</h2>
+        </div>
+
+        <section class="pdf-list" id="list" aria-live="polite">
+        </section>
+    </main>
+
+    <script>
+        const pdfs = [
+  { 
+    id: "p1",
+    title: "Angie Thomas",
+    authors: [
+      "Hendell Miguel Fidelis Peixoto do Carmo",
+      "Miguel Soares da Silva",
+      "Ikaro Lima Souza",
+      "Breno Mendes Tercero"
+    ],
+    description: "The writer Angie Thomas uses her young adult literature to promote empathy and be a form of activism, addressing themes like racism and social justice.",
+    thumb: "assets/thumbs/angie-thomas.png",
+    url: "assets/pdfs/angie-thomas.pdf"
+  },
+  { 
+    id: "p2",
+    title: "Toni Morrison",
+    authors: [
+      "Ana Julia Melo dos Reis",
+      "Jéssica Silva Santos",
+      "Luísa Mikie Shibukawa Araújo", 
+      "Thaíssa Messias de Souza"
+    ],
+    description: "A woman who wrote about novels with black protagonists, without stereotypes and purely representation. She managed to reach a large readership and was the first woman to win the Nobel Prize.",
+    thumb: "assets/thumbs/toni-morrison.jpeg",
+    url: "assets/pdfs/toni-morrison.pdf"
+  }
+];
+
+        const list = document.getElementById('list');
+
+        function createCard(p){
+  const article = document.createElement('article');
+  article.className = 'pdf-card';
+
+const authorsHtml = p.authors
+  .map(a => `<span class="author">${escapeHtml(a)}</span>`)
+  .join("<br>");
+
+
+  article.innerHTML = `
+    <div class="thumb" aria-hidden="true">
+      <img src="${p.thumb}" alt="Cover: ${escapeHtml(p.title)}">
+    </div>
+
+    <div class="meta">
+      <h3 class="title">${escapeHtml(p.title)}</h3>
+
+      <div class="authors">
+        ${authorsHtml}
+      </div>
+
+      <div class="desc">${escapeHtml(p.description)}</div>
+
+      <div class="meta-bottom">
+        <a class="btn-primary btn" href="${p.url}">
+          Open PDF
+        </a>
+      </div>
+      
+    </div>
+  `;
+
+  return article;
+}
+
+        function render() {
+            list.innerHTML = '';
+            pdfs.forEach(p => list.appendChild(createCard(p)));
+        }
+
+        function escapeHtml(s) { return (s + '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+        render();
+
+        document.getElementById('btn-browse').addEventListener('click', function (e) {
+            const target = document.getElementById('list');
+            if (!target) return;
+
+            document.getElementById('main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            setTimeout(() => {
+                const firstLink = document.querySelector('#list .pdf-card a');
+                if (firstLink) firstLink.focus({ preventScroll: true });
+            }, 600);
+        });
+    </script>
+</body>
+
+</html>
